@@ -34,19 +34,15 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 4.02165, -9.20382 )
+position = Vector2( 4.20894, -7.05001 )
 scale = Vector2( 4.15194, 2.87728 )
-polygon = PoolVector2Array( -10.7022, 9.81466, -1.02056, -9.40582, 9.46223, 9.95599 )
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-enabled = true
+polygon = PoolVector2Array( -10.7022, 9.81466, -1.02056, -9.40582, 8.5, 10 )
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 19.7916, -13.4319 )
+position = Vector2( 19.7916, -15.6794 )
 
 [node name="Position2D2" type="Position2D" parent="."]
-position = Vector2( -19.8064, -13.6087 )
+position = Vector2( -19.7128, -15.6689 )
