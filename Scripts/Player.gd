@@ -13,6 +13,7 @@ var curLvl : int = 0
 var curXp : int = 0
 var xpToNextLvl : int = 50
 var xpToLvlIncreaseRate : float = 1.25
+var killed :int = 0
 
 var interactDist : int = 70
 
@@ -20,6 +21,7 @@ var vel : Vector2 = Vector2()
 var facingDir : Vector2 = Vector2()
 
 const laserShot = preload("res://Scenes/LaserShot.tscn")
+var laserSpeed = -700
 
 func addGold(amount):
 	curGold += amount
@@ -34,7 +36,22 @@ func dead():
 	queue_free()
 	get_tree().paused = true
 	get_parent().get_node("Label").text = "Gameover"
+	
+func FireRateUpgrade():
+	var price = 100
+	
+	if(curGold >= price):
+		curGold = curGold - price
+		get_parent().get_node("GUI/HBoxContainer/Counters/Gold/GoldCont/Background/Label")._add_gold(-price)
+		laserSpeed = laserSpeed - 100
 
+func SpeedUpgrade():
+	var price = 100
+	if(curGold >= price):
+		curGold = curGold - price
+		get_parent().get_node("GUI/HBoxContainer/Counters/Gold/GoldCont/Background/Label")._add_gold(-price)
+		moveSpeed = moveSpeed + 100
+		
 func gotHit(var hit):
 	$AnimatedSprite.play("Hit")
 	get_parent().get_node("GUI/HBoxContainer/Bars/Bar").removeLife(hit);
@@ -69,12 +86,19 @@ func _physics_process(delta):
 		if(Input.is_action_just_pressed("Fire")):
 			var laser = laserShot.instance()
 			var laser2 = laserShot.instance()
-			laser.init(multiplyer)
-			laser2.init(multiplyer)
+			laser.init(multiplyer,laserSpeed)
+			laser2.init(multiplyer,laserSpeed)
 			get_parent().add_child_below_node(get_child(1),laser)
 			get_parent().add_child_below_node(get_child(1),laser2)
 			laser.position = $Position2D.global_position
 			laser2.position = $Position2D2.global_position
+			
+			$AudioStreamPlayer2D.play()
+			##get_node("AudioStreamPlayer").stream_paused = false
+			##get_node("AudioStreamPlayer").stream_paused = true
+			
+			
+		
 		
 		vel = vel.normalized()
 		
@@ -82,4 +106,7 @@ func _physics_process(delta):
 		
 	else:
 		pass
+
+
+
 

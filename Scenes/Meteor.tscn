@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Textures/Enemy/meteor/pixil-frame-0 (14).png" type="Texture" id=1]
+[ext_resource path="res://Textures/Enemy/meteor/pixil-frame-0 (12).png" type="Texture" id=2]
+[ext_resource path="res://Textures/Enemy/meteor/pixil-frame-0 (13).png" type="Texture" id=3]
+[ext_resource path="res://Textures/Enemy/meteor/pixil-frame-0 (11).png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Meteor.gd" type="Script" id=5]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.688889, 0.992593, 1 )
+colors = PoolColorArray( 0.894531, 0.503147, 0.0454254, 1, 0.957031, 0.0485992, 0.0485992, 1, 0.921875, 0.349782, 0.0396118, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+direction = Vector3( 1, -1, 0 )
+spread = 180.0
+gravity = Vector3( 0, -200, 0 )
+initial_velocity = 40.48
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 2 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 29.3478
+
+[node name="KinematicBody2D" type="Area2D"]
+script = ExtResource( 5 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0.125, -21 )
+amount = 1000
+process_material = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.131744, -0.307129 )
+frames = SubResource( 4 )
+frame = 3
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0.420471, 3.78404 )
+shape = SubResource( 5 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="body_entered" from="." to="." method="_on_KinematicBody2D_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -8,12 +8,14 @@ var si = Vector2()
 #var si_multiplyer = 2
 
 
-func init(var si_multiplyer):
+func init(var si_multiplyer,var laserSpeed):
 	si.x = si_multiplyer
 	si.y = si_multiplyer
 	
 	$CollisionShape2D.scale = si
 	scale = si
+	
+	speed = laserSpeed
 
 func _physics_process(delta):
 	velocity.y = speed * delta

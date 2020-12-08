@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fichieroggjeu.ogg-16ac1d7870d95ea30ba5bc5f053f52c1.oggstr"
+
+[deps]
+
+source_file="res://Sounds/fichieroggjeu.ogg"
+dest_files=[ "res://.import/fichieroggjeu.ogg-16ac1d7870d95ea30ba5bc5f053f52c1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

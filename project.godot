@@ -16,13 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Projet_synthese_RD"
-run/main_scene="res://Scenes/MainScene.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=720
 window/size/height=1080
+window/stretch/mode="2d"
 
 [input]
 
